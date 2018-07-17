@@ -26,7 +26,7 @@ Custom Field #2 Name: Chart / Dimensions / B
 
 Now as we have custom fields paths built, we can transform them into object:
 
-```
+```javascript
 import transformPathToHierarchy from 'bigcommerce-custom-fields-hierarchy';
 
 const customFieldsObj = transformPathToHierarchy(this.context.category.products, 'Chart');
@@ -105,5 +105,5 @@ Transforms products custom fields paths into Javascript object
 | Param | Type | Description |
 | --- | --- | --- |
 | products | <code>Array</code> | products that are coming from BigCommerce context |
-| namespace | <code>string</code> | only transform custom fields which have this namespace |
+| namespace | <code>string  </code> | only transform custom fields which have this namespace |
 
