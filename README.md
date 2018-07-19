@@ -54,15 +54,6 @@ As a result we get an object:
 ```
 ## API
 
-<a name="flattenHierarchy"></a>
-
-## flattenHierarchy(hierarchy) ⇒ <code>Array</code>
-Flattens the Hierarchy to only one level
-
-| Param | Type |
-| --- | --- |
-| hierarchy | <code>Array</code> | 
-
 <a name="fieldExists"></a>
 
 ## fieldExists(fields, fieldName) ⇒ <code>Boolean</code>
