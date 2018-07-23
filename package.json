@@ -4,13 +4,28 @@
   "description": "Utility module for formatting hierarchically constructed custom fields data.",
   "main": "lib/main.js",
   "scripts": {
+    "build": "grunt webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git@gitlab.brandlabs.net:brandlabs/bigcommerce-custom-fields-hierarchy.git"
   },
-  "author": "Shota Karkashadze <shota.karkashadze@brandlabs.us>",
+  "author": "Brand Labs",
   "license": "ISC",
-  "dependencies": {}
+  "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-dynamic-import-webpack": "^1.0.2",
+    "babel-preset-env": "^1.7.0",
+    "clean-webpack-plugin": "^0.1.19",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "grunt": "^1.0.3",
+    "grunt-eslint": "^21.0.0",
+    "grunt-sass-lint": "^0.2.4",
+    "grunt-webpack": "^3.1.2",
+    "uglifyjs-webpack-plugin": "^1.2.7",
+    "webpack": "^4.16.2"
+  }
 }
