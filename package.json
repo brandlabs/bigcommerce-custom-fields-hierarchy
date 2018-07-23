@@ -2,7 +2,7 @@
   "name": "bigcommerce-custom-fields-hierarchy",
   "version": "1.0.0",
   "description": "Utility module for formatting hierarchically constructed custom fields data.",
-  "main": "lib/main.js",
+  "main": "./dist/bigcommerce-custom-fields-hierarchy.min.js",
   "scripts": {
     "build": "grunt webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
