@@ -33,7 +33,7 @@ module.exports = function exportGrunt(grunt) {
             },
             development: {
                 entry: [
-                    './lib/main.js',
+                    './src/main.js',
                 ],
                 output: {
                     filename: 'bigcommerce-custom-fields-hierarchy.js',
@@ -41,7 +41,7 @@ module.exports = function exportGrunt(grunt) {
             },
             production: {
                 entry: [
-                    './lib/main.js',
+                    './src/main.js',
                 ],
                 output: {
                     filename: 'bigcommerce-custom-fields-hierarchy.min.js',
