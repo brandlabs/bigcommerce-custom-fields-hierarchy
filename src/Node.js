@@ -1,8 +1,7 @@
 export default class Node {
-    constructor(name, path, parent, children) {
+    constructor(name, path, children) {
         this.name = name;
         this.path = path;
-        this.parent = parent;
         this.children = children;
     }
 }

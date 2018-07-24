@@ -5,7 +5,6 @@
  * @param {*} a new element
  * @returns A shallow copied new array filled with the new element
  */
-
 export function insert(original, index, newElement) {
     const result = original.slice(0);
 

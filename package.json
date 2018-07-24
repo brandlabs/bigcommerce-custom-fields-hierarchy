@@ -2,7 +2,7 @@
   "name": "bigcommerce-custom-fields-hierarchy",
   "version": "1.0.0",
   "description": "Utility module for formatting hierarchically constructed custom fields data.",
-  "main": "./src/main.js",
+  "main": "index.js",
   "scripts": {
     "build": "grunt webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,7 +12,7 @@
     "url": "git@gitlab.brandlabs.net:brandlabs/bigcommerce-custom-fields-hierarchy.git"
   },
   "author": "Brand Labs",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",

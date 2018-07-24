@@ -5,7 +5,7 @@ const delimiter = '\\';
 
 /**
  * Checks whether namespace exists and matches the custom field namespace
- * @param {string} pathNamespace - custom field namespace
+ * @param {Object} field
  * @param {string} namespace - user provided namespace
  * @returns {Boolean}
  */
@@ -13,11 +13,27 @@ const belongsToNamespace = (field, namespace) => namespace && field.name.trim().
 
 /**
  * Removes namespace from all of the custom fields
+ * @param {Array} customFields
  */
 const removeNamespaces = (customFields) => customFields.map(field => field.substring(field.indexOf(delimiter)+1));
 
 /**
+ * Get node formatted path
+ * @param {Object} node
+ */
+const getPath = (node) => node.path.trim();
+
+/**
+ * Checks if a node list contains a certain node
+ * @param {Array} nodeList
+ * @param {Object} childNode
+ */
+const nodeExists = (nodeList, childNode) => nodeList.some(rootNode => getPath(rootNode) === getPath(childNode))
+
+/**
  * Get the unique custom fields sorted based on the initial order and filtered based on the provided namespace
+ * @param {Array} products
+ * @param {string} namespace
  */
 function formatCustomFields(products, namespace) {
     return products.reduce((fields, product) => {
@@ -30,7 +46,7 @@ function formatCustomFields(products, namespace) {
     }, []);
 }
 
-class Tree {
+class CustomFieldsHierarchy {
     constructor(customFields) {
         this.customFields = customFields;
         this.hierarchy = [];
@@ -38,53 +54,65 @@ class Tree {
         this.constructHierarchy();
     }
 
-    getPath(node) {
-        return node.path.trim();
+    getHierarchy() {
+        return this.hierarchy;
     }
 
-    equals(node1, node2) {
-        return this.getPath(node1) === this.getPath(node2);
+    constructHierarchy() {
+        this.customFields.forEach((field) => this.populateHierarchy(field));
     }
 
-    findParent(parentPath) {
-        for (const currentNode of this.hierarchy) {
-            if (parentPath.trim() === this.getPath(currentNode)) {
+    /**
+     * Recursively traverses the hierarchy until it finds the desired parent node
+     * @param {string} parentPath
+     * @param {Array} nodeList
+     * @returns {Node}
+     */
+    getParent(parentPath, nodeList) {
+        for (const currentNode of nodeList) {
+            if (parentPath.trim() === getPath(currentNode)) {
                 return currentNode;
+            }
+
+            const parent = this.getParent(parentPath, currentNode.children);
+            if (parent) {
+                return parent;
             }
         }
     }
 
-    rootNoteExists(node) {
-        return this.hierarchy.some(rootNode => this.equals(rootNode, node));
-    }
-
-    populatePath(fullPath) {
+    /**
+     * Adds all the nodes to the hierarchy
+     * @param {string} fullPath
+     */
+    populateHierarchy(fullPath) {
         const fields = fullPath.split(delimiter);
 
         fields.forEach((field, index) => {
             const currentPath = fields.slice(0, index + 1);
-            const node = new Node(field, currentPath.join(delimiter), undefined, []);
+            const node = new Node(field, currentPath.join(delimiter), []);
 
-            if (index === 0 && !this.rootNoteExists(node)) {
+            if (index === 0 && !nodeExists(this.hierarchy, node)) {
                 this.hierarchy.push(node);
             } else {
-                const parentPath = fields.slice(0, index).join(delimiter);
-                const parent = this.findParent(parentPath);
-                if (parent) {
-                    parent.children.push(node);
-                }
+                this.populateChildren(fields, index, node);
             }
         });
     }
 
-    constructHierarchy() {
-        this.customFields.forEach((field) => {
-            this.populatePath(field);
-        });
-    }
+    /**
+     * Adds all the nodes to the hierarchy
+     * @param {Array} fields
+     * @param {number} index
+     * @param {Node} node
+     */
+    populateChildren(fields, index, node) {
+        const parentPath = fields.slice(0, index).join(delimiter);
+        const parentNode = this.getParent(parentPath, this.hierarchy);
 
-    getHierarchy() {
-
+        if (parentNode && !nodeExists(parentNode.children, node)) {
+            parentNode.children.push(node);
+        }
     }
 }
 
@@ -95,9 +123,8 @@ class Tree {
  * @returns {Array}
  */
 export default function transformPathToHierarchy(products, namespace) {
-
     const customFields = removeNamespaces(formatCustomFields(products, namespace));
-    const tree = new Tree(customFields);
+    const hierarchy = new CustomFieldsHierarchy(customFields);
 
+    return hierarchy.getHierarchy();
 }
-
