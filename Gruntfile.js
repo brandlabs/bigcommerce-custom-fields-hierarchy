@@ -36,7 +36,7 @@ module.exports = function exportGrunt(grunt) {
                     './src/main.js',
                 ],
                 output: {
-                    filename: 'bigcommerce-custom-fields-hierarchy.js',
+                    filename: 'custom-fields-hierarchy.js',
                 },
             },
             production: {
@@ -44,7 +44,7 @@ module.exports = function exportGrunt(grunt) {
                     './src/main.js',
                 ],
                 output: {
-                    filename: 'bigcommerce-custom-fields-hierarchy.min.js',
+                    filename: 'custom-fields-hierarchy.min.js',
                 },
                 plugins: [
                     new CleanWebpackPlugin(['dist']),
