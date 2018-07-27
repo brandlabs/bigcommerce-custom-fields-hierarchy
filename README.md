@@ -2,7 +2,7 @@
 
 Utility module for transforming hierarchically constructed products custom fields to Javascript objects.
 
-## Usage
+## Guidelines
 
 ### Constructing custom fields
 Let's say we have a parent child relationship with custom fields, for example: "Dimensions" custom field can have two sub custom fields "Dimension A" and "Dimension B".
@@ -73,6 +73,10 @@ Please note that the depth can be unlimited. For example `Chart \ Thread Sizes \
   ]
 }]
 ```
+
+### Delimiter format
+
+The format for delimiter is `[whitespace]\[whitespace]`, so backslashes which are not surrounded with whitespace won't be considered as separator and will be included as a custom field title.
 
 ## API
 

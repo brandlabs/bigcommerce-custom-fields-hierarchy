@@ -1,7 +1,7 @@
 import Node from './Node';
 import {insert} from './utils';
 
-const delimiter = '\\';
+const delimiter = ' \\ ';
 
 /**
  * Checks whether namespace exists and matches the custom field namespace
@@ -15,7 +15,7 @@ const belongsToNamespace = (field, namespace) => namespace && field.name.trim().
  * Removes namespace from all of the custom fields
  * @param {Array} customFields
  */
-const removeNamespaces = (customFields) => customFields.map(field => field.substring(field.indexOf(delimiter)+1));
+const removeNamespaces = (customFields) => customFields.map(field => field.substring(field.indexOf(delimiter)+delimiter.length));
 
 /**
  * Get node formatted path
@@ -101,7 +101,7 @@ class CustomFieldsHierarchy {
     }
 
     /**
-     * Adds all the nodes to the hierarchy
+     * Adds all the child nodes to the hierarchy
      * @param {Array} fields
      * @param {number} index
      * @param {Node} node
