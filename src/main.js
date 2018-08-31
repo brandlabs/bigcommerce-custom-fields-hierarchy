@@ -1,3 +1,4 @@
+import './polyfills';
 import Node from './Node';
 import {insert} from './utils';
 
