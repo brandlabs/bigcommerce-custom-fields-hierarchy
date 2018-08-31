@@ -126,7 +126,11 @@ Transforms products custom fields paths into Javascript object
 | namespace | <code>string  </code> | only transform custom fields which have this namespace |
 
 ## Notes
-- Since BigCommerce doesn't transpile external package code (for oldies like IE11), we provide transpiled files inside __dist/__ folder. You can access these files adding an alias on your `webpack.conf.js` file like `'bigcommerce-custom-fields-hierarchy': path.resolve(__dirname, 'node_modules/bigcommerce-custom-fields-hierarchy/dist/product-options.min.js')`
+- Since BigCommerce doesn't transpile external package code (for oldies like IE11), we provide transpiled files inside __dist/__ folder. You can access these files adding an alias on your `webpack.conf.js` file like:
+
+```javascript
+'bigcommerce-custom-fields-hierarchy': path.resolve(__dirname, 'node_modules/bigcommerce-custom-fields-hierarchy/dist/custom-fields-hierarchy.min.js')
+```
 
 ## Authors
 * Shota Karkashadze
