@@ -109,9 +109,16 @@ Please note that the depth can be unlimited. For example `Chart \ Thread Sizes \
 
 ![BigCommerce Custom fields](https://user-images.githubusercontent.com/3370367/44449946-a26c0880-a600-11e8-8785-7d52e64d8e45.png "BigCommerce Custom fields")
 
-### Delimiter format
+### Delimiter
 
+#### Delimiter format
 The format for delimiter is `[whitespace]\[whitespace]`, so backslashes which are not surrounded with whitespace won't be considered as separator and will be included as a custom field title.
+
+#### Importing Delimiter
+Delimiter can be imported into your project:
+```javascript
+import { delimiter } from 'bigcommerce-custom-fields-hierarchy';
+```
 
 ## API
 

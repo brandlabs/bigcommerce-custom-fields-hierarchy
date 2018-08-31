@@ -1,7 +1,7 @@
 import Node from './Node';
 import {insert} from './utils';
 
-const delimiter = ' \\ ';
+export const delimiter = ' \\ ';
 
 /**
  * Checks whether namespace exists and matches the custom field namespace
