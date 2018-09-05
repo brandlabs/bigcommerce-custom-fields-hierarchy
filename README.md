@@ -2,6 +2,37 @@
 
 Utility module for transforming hierarchically constructed products custom fields to Javascript objects.
 
+## Info
+* **URL:** https://www.npmjs.com/package/bigcommerce-custom-fields-hierarchy
+* **Platform:** BigCommerce
+
+## Setup
+Requirements: [NodeJS](https://nodejs.org/en/download/package-manager/), [npm](https://docs.npmjs.com/getting-started/installing-node#install-npm--manage-npm-versions)
+
+**1\. Run `npm ci` to install dependencies.**
+
+**2\. Inject products in your cornerstone template.**
+
+You can use **any** types of product list, for example products that are coming with category or related products.
+
+`{{inject "products" category.products}}`
+
+Or
+
+`{{inject "relatedProducts" product.related_products}}`
+
+Or any other product list which has custom fields property
+
+**3\. Import the library main function in your theme JS.**
+
+For example, for [Cornerstone](https://github.com/bigcommerce/cornerstone) it could be any `PageManager` file.
+
+`import transformPathToHierarchy from 'bigcommerce-custom-fields-hierarchy';`
+
+**4\. Transform custom fields to JS object**
+
+`const customFieldsObj = transformPathToHierarchy(this.context.category.products, 'Chart');`
+
 ## Guidelines
 
 ### Constructing custom fields
@@ -29,7 +60,7 @@ Now as we have custom fields paths built, we can transform them into object:
 ```javascript
 import transformPathToHierarchy from 'bigcommerce-custom-fields-hierarchy';
 
-const customFieldsObj = transformPathToHierarchy(this.context.category.products, 'Chart');
+const customFieldsObj = transformPathToHierarchy(this.context.products, 'Chart');
 console.log(customFieldsObj);
 ```
 
@@ -74,9 +105,20 @@ Please note that the depth can be unlimited. For example `Chart \ Thread Sizes \
 }]
 ```
 
-### Delimiter format
+### Example of constructing custom fields
 
+![BigCommerce Custom fields](https://user-images.githubusercontent.com/3370367/44449946-a26c0880-a600-11e8-8785-7d52e64d8e45.png "BigCommerce Custom fields")
+
+### Delimiter
+
+#### Delimiter format
 The format for delimiter is `[whitespace]\[whitespace]`, so backslashes which are not surrounded with whitespace won't be considered as separator and will be included as a custom field title.
+
+#### Importing Delimiter
+Delimiter can be imported into your project:
+```javascript
+import { delimiter } from 'bigcommerce-custom-fields-hierarchy';
+```
 
 ## API
 
@@ -91,7 +133,11 @@ Transforms products custom fields paths into Javascript object
 | namespace | <code>string  </code> | only transform custom fields which have this namespace |
 
 ## Notes
-- Since BigCommerce doesn't transpile external package code (for oldies like IE11), we provide transpiled files inside __dist/__ folder. You can access these files adding an alias on your `webpack.conf.js` file like `'bigcommerce-custom-fields-hierarchy': path.resolve(__dirname, 'node_modules/bigcommerce-custom-fields-hierarchy/dist/product-options.min.js')`
+- Since BigCommerce doesn't transpile external package code (for oldies like IE11), we provide transpiled files inside __dist/__ folder. You can access these files adding an alias on your `webpack.conf.js` file like:
+
+```javascript
+'bigcommerce-custom-fields-hierarchy': path.resolve(__dirname, 'node_modules/bigcommerce-custom-fields-hierarchy/dist/custom-fields-hierarchy.min.js')
+```
 
 ## Authors
 * Shota Karkashadze

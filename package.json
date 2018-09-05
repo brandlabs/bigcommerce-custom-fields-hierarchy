@@ -1,6 +1,6 @@
 {
   "name": "bigcommerce-custom-fields-hierarchy",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Utility module for formatting hierarchically constructed custom fields data.",
   "main": "index.js",
   "scripts": {
